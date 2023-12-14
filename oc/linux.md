@@ -42,8 +42,9 @@ Some common Linux bootloader paths:
 1. Know which bootloader/manager you're using (GRUB2 or systemd-boot or anything else)
 
 2. **Boot to linux through OpenCore, you may want to use UEFI Shell to execute the EFI Application for your bootloader/manager**
+   (On Macs: EFI shell and Booting Linux can also be reached by using [rEFInd](http://www.rodsbooks.com/refind/) on a bootable usb stick or CD) 
 
-3. Find out your bootloader/manager's path, usually it's in the EFI (if you properly set it up)
+4. Find out your bootloader/manager's path, usually it's in the EFI (if you properly set it up)
 
    1. In a terminal window on your linux install, run `lsblk` (available in most distributions)
 
@@ -79,9 +80,9 @@ Some common Linux bootloader paths:
       - the binary's partition number
       - the binary's disk path (`/dev/sda` or `/dev/nvme0nX`)
 
-4. Install `efibootmgr` in your linux system (usually it comes built-in in ubuntu, but requires install on arch for example)
+5. Install `efibootmgr` in your linux system (usually it comes built-in in ubuntu, but requires install on arch for example)
 
-5. Once installed, run as **sudoer/superuser** (or use sudo)
+6. Once installed, run as **sudoer/superuser** (or use sudo)
 
    ```
    efibootmgr -c -L "Linux" -l "\EFI\pathto\filex64.efi" -d "/dev/sda" -p 1
@@ -93,7 +94,7 @@ Some common Linux bootloader paths:
    - `-d "/dev/sda"`: disk path so that `efibootmgr` know which disk the UEFI firmware should read the file from, it can be `/dev/nvme0nX` (with X as a number) if you're using NVMe
    - `-p 1`: point the partition number we found earlier, in case your EFI partition is the first one, this can be omitted
 
-6. Reboot and check OpenCore, **you will find a new entry named `EFI`**, there can be many as it can also point to other boot entries, that's by design by OpenCore, not a bug.
+7. Reboot and check OpenCore, **you will find a new entry named `EFI`**, there can be many as it can also point to other boot entries, that's by design by OpenCore, not a bug.
 
 **Note:**
 
